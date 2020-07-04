@@ -4,6 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Constants from 'expo-constants';
 import { EvilIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons'; 
+import Hourly from './components/Hourly'
 
 export default function App() {
   return (
@@ -32,7 +33,7 @@ export default function App() {
           <View style={{ alignItems: 'center', marginTop: 10  }}>
             <View style={{ flexDirection: "row",alignItems: 'center'  }}>
             <Entypo name="cloud" size={60} color="white"  />
-              <Text style={{ color: '#FFFFFF', fontSize: 80, fontFamily: 'sans-serif',marginLeft:15 }}>12°</Text>
+              <Text style={{ color: '#FFFFFF', fontSize: 80,marginLeft:15 }}>12°</Text>
             </View>
             <View style={{ alignItems: 'center', marginTop: 10 }}>
             <Text style={{ color: '#FFFFFF90', fontSize: 20 }}>14°/11° Feels like 11°</Text>
@@ -43,7 +44,7 @@ export default function App() {
           </View>
 
           <View style={{ backgroundColor: '#FFFFFF30', borderRadius: 30,marginTop:60 }}>
-            <View style={{flexDirection:'row',paddingTop:30,paddingRight:60,paddingBottom:30,paddingLeft:60,justifyContent:"space-between"}}>
+            <View style={{flexDirection:'row',paddingTop:30,paddingRight:50,paddingBottom:30,paddingLeft:50,justifyContent:"space-between"}}>
                 <View style={{flexDirection:'row',alignItems: 'center'}}>
                 <Entypo name="drop" size={26} color="white" style={{marginRight:15}} />
                   <View style={{flexDirection:'column'}}>
@@ -52,7 +53,7 @@ export default function App() {
                   </View>
                 </View>
 
-                <View style={{width:1,backgroundColor:"white",height:'85%',alignSelf:"center"}}></View>
+                <View style={{width:1,backgroundColor:"white",height:'80%',alignSelf:"center"}}></View>
                 <View style={{flexDirection:'row',alignItems: 'center'}}>
                 <Entypo name="drop" size={26} color="white" style={{marginRight:15}} />
                   <View style={{flexDirection:'column',alignSelf:"flex-end"}}>
@@ -62,7 +63,11 @@ export default function App() {
                 </View>
             </View>
           </View>
+          <Text style={{color:"white", marginTop:15,marginLeft:20,fontSize:16}}>Hourly</Text>
+          
+        <Hourly></Hourly>
         </View>
+
 
       </ScrollView>
     </SafeAreaView>
