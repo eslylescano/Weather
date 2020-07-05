@@ -6,10 +6,8 @@ Weather is a React-Native app base on the design of the weather app
 
 Install npm.
 
-```node
-Intall expo
+Install expo.
 
-```
 
 ## Usage
 
