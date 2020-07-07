@@ -6,25 +6,37 @@ import Svg, { Line } from 'react-native-svg';
 
 export default function Daily() {
     const data = [
-        { date: new Date('2014-09-27T18:09:49-0300'), icon: 'drop', humidity: 30, feels_like: 10 },
-        { date: new Date('2014-09-27T18:12:49-0300'), icon: 'drop', humidity: 40, feels_like: 10 },
-        { date: new Date('2014-09-27T18:15:49-0300'), icon: 'drop', humidity: 50, feels_like: 10 },
-        { date: new Date('2014-09-27T18:18:49-0300'), icon: 'drop', humidity: 10, feels_like: 10 },
-        { date: new Date('2014-09-27T18:21:49-0300'), icon: 'drop', humidity: 17, feels_like: 5 },
-        { date: new Date('2014-09-27T18:00:49-0300'), icon: 'drop', humidity: 19, feels_like: 8 },
-        { date: new Date('2014-09-27T18:03:49-0300'), icon: 'drop', humidity: 21, feels_like: 10 },
-        { date: new Date('2014-09-27T18:06:49-0300'), icon: 'drop', humidity: 29, feels_like: 20 }]
+        { date: new Date('2014-09-27T18:09:49-0300'), icon: 'drop', humidity: 30, temp_min: 10,temp_max: 15 },
+        { date: new Date('2014-09-27T18:12:49-0300'), icon: 'drop', humidity: 40, temp_min: 11,temp_max: 16 },
+        { date: new Date('2014-09-27T18:15:49-0300'), icon: 'drop', humidity: 50, temp_min: 12,temp_max: 17 },
+        { date: new Date('2014-09-27T18:18:49-0300'), icon: 'drop', humidity: 10, temp_min: 9,temp_max: 16 },
+        { date: new Date('2014-09-27T18:21:49-0300'), icon: 'drop', humidity: 17, temp_min: 7,temp_max: 12 },
+        { date: new Date('2014-09-27T18:00:49-0300'), icon: 'drop', humidity: 19, temp_min: 12,temp_max: 16 },
+        { date: new Date('2014-09-27T18:03:49-0300'), icon: 'drop', humidity: 21, temp_min: 11,temp_max: 18 },
+        { date: new Date('2014-09-27T18:06:49-0300'), icon: 'drop', humidity: 29, temp_min: 15,temp_max: 20 }]
 
-    const heightFeelsLike = (data, { feels_like }) => {
-        const minHeight = 5;
-        const maxHeight = 32;
-        const feelsLikeArr = data.map(item => item.feels_like);
-        const min = Math.min(...feelsLikeArr);
-        const max = Math.max(...feelsLikeArr);
-        if (min === max)
-            return maxHeight;
-        return minHeight + (feels_like - min) / ((max - min) / (maxHeight - minHeight));
+    const heightTemp = (data, { temp_min,temp_max }) => {
+        const minHeight = 10;
+        const maxHeight = 36;
+        const diffTempArr = data.map(item=>item.temp_max-item.temp_min);
+        const diffTemp=temp_max-temp_min;
+        const minDiff = Math.min(...diffTempArr);
+        const maxDiff = Math.max(...diffTempArr);
+        if(minDiff===maxDiff)
+        return maxHeight;
+        return minHeight+(diffTemp-minDiff)/((maxDiff-minDiff)/(maxHeight-minHeight));
+    }
 
+    const calcMarginTopTemps = (data, { temp_min}) => {
+        const temp=temp_min;
+        const minMargingTop=20;
+        const maxMargingTop=35;
+        const TempArr = data.map(item=>item.temp_min);
+        const minTemp=Math.min(...TempArr);
+        const maxTemp=Math.max(...TempArr);
+        if(maxTemp===minTemp)
+        return minMargingTop;
+        return minMargingTop-((minMargingTop-maxMargingTop)/(maxTemp-minTemp))*(maxTemp-temp);
     }
 
     const renderDaily = (data) => {
@@ -48,10 +60,11 @@ export default function Daily() {
                         <Entypo name={item.icon} size={14} color="white" />
                         <Text style={{ color: 'white', fontSize: 12 }}>{item.humidity}%</Text>
                     </View>
-                    <View style={{ justifyContent: 'flex-end', height: 75 }}>
+                    <View style={{ justifyContent: 'flex-start',marginTop:calcMarginTopTemps(data, item) }}>
                         <View style={{ alignItems: 'center' }}>
-                            <Text style={{ color: 'white', fontSize: 16 }}>{item.feels_like}°</Text>
-                            <View style={{ width: 5, height: heightFeelsLike(data, item), borderRadius: 20, backgroundColor: "white", marginTop: 2 }}></View>
+                            <Text style={{ color: 'white', fontSize: 16 }}>{item.temp_max}°</Text>
+                            <View style={{ width: 5, height: heightTemp(data, item), borderRadius: 20, backgroundColor: "white", marginTop: 2 }}></View>
+                            <Text style={{ color: 'white', fontSize: 16, marginTop: 2 }}>{item.temp_min}°</Text>
                         </View>
                     </View>
                 </View>
@@ -60,8 +73,11 @@ export default function Daily() {
     }
 
     return (
-        <View style={{ backgroundColor: '#FFFFFF30', borderRadius: 30, marginTop: 10, padding: 30, flexDirection: 'row' }}>
-            {renderDaily(data)}
+        <View style={{backgroundColor: '#FFFFFF30', borderRadius: 30, marginTop: 10, padding: 30}}>
+        <View style={{  flexDirection: 'row' }}>
+            {renderDaily(data)} 
+        </View>
+        <Text style={{ fontSize: 16, color: 'white',alignItems: 'center' }}>Today</Text>
         </View>
     )
 }
