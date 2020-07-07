@@ -5,6 +5,7 @@ import Constants from 'expo-constants';
 import { EvilIcons } from '@expo/vector-icons'; 
 import { Entypo } from '@expo/vector-icons'; 
 import Hourly from './components/Hourly'
+import Daily from './components/Daily';
 
 export default function App() {
   return (
@@ -66,6 +67,9 @@ export default function App() {
           <Text style={{color:"white", marginTop:15,marginLeft:20,fontSize:16}}>Hourly</Text>
           
         <Hourly></Hourly>
+        <Text style={{color:"white", marginTop:15,marginLeft:20,fontSize:16}}>Daily</Text>
+          
+          <Daily></Daily>
         </View>
 
 
