@@ -6,6 +6,8 @@ import { EvilIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons'; 
 import Hourly from './components/Hourly'
 import Daily from './components/Daily';
+import Details from './components/Details';
+import LifeIndex from './components/LifeIndex';
 
 export default function App() {
   return (
@@ -68,8 +70,11 @@ export default function App() {
           
         <Hourly></Hourly>
         <Text style={{color:"white", marginTop:15,marginLeft:20,fontSize:16}}>Daily</Text>
-          
           <Daily></Daily>
+          <Text style={{color:"white", marginTop:15,marginLeft:20,fontSize:16}}>Details</Text>
+          <Details></Details>
+          <Text style={{color:"white", marginTop:15,marginLeft:20,fontSize:16}}>Life index</Text>
+          <LifeIndex></LifeIndex>
         </View>
 
 

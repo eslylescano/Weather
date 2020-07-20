@@ -77,7 +77,10 @@ export default function Daily() {
         <View style={{  flexDirection: 'row' }}>
             {renderDaily(data)} 
         </View>
-        <Text style={{ fontSize: 16, color: 'white',alignItems: 'center' }}>Today</Text>
+        <View style={{alignItems:'flex-end'}}>
+        <Text style={{ fontSize: 16, color: 'white' }}>Yesterday: 15°/11°</Text>
+        </View>
+
         </View>
     )
 }
