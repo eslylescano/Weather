@@ -1,0 +1,13 @@
+@key=91ad150202caea1c0860c33dc49f94a0
+@lat=54.37795
+@lon=-2.81568
+
+#Current weather data by geographic coordinates
+Get api.openweathermap.org/data/2.5/weather?lat={{lat}}&lon={{lon}}&appid={{key}}
+###
+#One Call API
+Get https://api.openweathermap.org/data/2.5/onecall?lat={{lat}}&lon={{lon}}&appid={{key}}
+
+
+###
+Get https://hn.algolia.com/api/v1/search?query=redux

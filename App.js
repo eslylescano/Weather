@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect,useState} from 'react';
 import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
 import { LinearGradient } from "expo-linear-gradient";
 import Constants from 'expo-constants';
@@ -8,8 +8,29 @@ import Hourly from './components/Hourly'
 import Daily from './components/Daily';
 import Details from './components/Details';
 import LifeIndex from './components/LifeIndex';
+import {getWeather,getGeo} from './networking/Server'
 
-export default function App() {
+export default function App(props) {
+  const [weather,setWeather]=useState({});
+  const [geo,setGeo]=useState({});
+
+  async function fetchWeather() {
+    const response = await getWeather();
+    console.log(response);
+    setWeather(response);
+  }
+
+  async function fetchGeo() {
+    const response = await getGeo();
+    console.log(response);
+    setGeo(response);
+  }
+
+  useEffect( ()=>{
+    fetchWeather();
+    fetchGeo();
+  },[]);
+
   return (
     <SafeAreaView >
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -28,7 +49,7 @@ export default function App() {
             </View>
           </View>
           <View style={{ alignItems: 'center', marginTop: 30 }}>
-            <Text style={{ color: 'white', fontSize: 22 }}>Kendal</Text>
+  <Text style={{ color: 'white', fontSize: 22 }}>{geo.city}</Text>
           </View>
           <View style={{ alignItems: 'center', marginTop: 10 }}>
             <Text style={{ color: '#FFFFFF90', fontSize: 18 }}>Mon 29 June 22:28</Text>
